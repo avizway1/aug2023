@@ -1,0 +1,388 @@
+CAPEX : Capital Expendature : No/Less Capital expendature. 
+
+OPEX : Operational Expendature : Less opex for cloud environment.
+
+--> You can go global in minutes.
+
+Pay-as-you-go : Pay for the resources you actually use.
+
+
+99.999999999 % Durability
+0.000000001 %
+
+
+Demo Link : https://www.youtube.com/watch?v=J0SYm4ahTD0
+
+
+======================================================================
+
+D: 23/08/2023
+
+Requirement : Need a Website, that can be accesable anywhere from the world.
+
+SaaS : Swiggy/zomato : order : Lightsail
+PaaS : Go to Restro : Order
+IaaS : Prepeare your self 
+
+On-Premise/Traditional : 
+
+
+
+AWS Intro : 
+
+2004 : SQS 
+2006 : AWS oficially launched : s3 and sqs
+
+
+
+======================================================================
+
+D: 24/08/2023
+
+https://www.udemy.com/course/jenkinswithavinash/?couponCode=AWSAVINASH9AM
+
+https://www.udemy.com/course/linuxwithavinash/?couponCode=AWSAVINASH9AM
+
+
+---
+
+AWS Gloabl Infrastructure : 
+
+Regions :
+AZs / Availability Zones : 
+PoP / Edge Locations : 
+
+
+Region : No technical defination, Its a Physical / geographical location. 
+32 launched region (Aug, 2023)
+
+India : Mumbai : ap-south-1
+& Hyd : ap-south-2
+
+2 --> China
+2 --> us-gov-cloud
+
+AZ/ Availability Zone : AZ is nothing but a Data Center or combination of multiple DCs.. These AZs interconnected with multiple connectivity options.. Every AZ is independent to its failures. 
+Count : 102 AZs as of Aug 2023.
+
+Every region contains min of 3 AZs.. 
+
+Mumbai : ap-south-1a / ap-south-1b / ap-south-1c
+Hyd : ap-south-2a / ap-south-2b / ap-south-2c
+
+
+Edge Locations / PoP (point of Presence) Locations : CDN Content Delivery Network : 
+We have 450+ edge locations across the globe.. Data chache near to end customer location.!! 
+--> Cloudfront
+
+
+--
+
+ping google.com
+
+for windows : tracert google.com
+Linux : traceroute google.com
+
+
+-----
+
+
+Course Content : https://avinash.s3.amazonaws.com/aws.pdf
+
+
+Previous Demo Links : 
+
+AWS @ 9:15 AM (IST) By Mr.Avinash
+Day-1 https://youtu.be/1JHp0IL6CUQ
+Day-2 https://youtu.be/iyEDo6sE1Dk
+Day-3 https://youtu.be/igR86Q8QBlM
+Day-4 https://youtu.be/cTZsf_Jt1PA
+Day-5 https://youtu.be/hIKKh5H1qZg
+Day-6 https://youtu.be/IPxQlLVZUxg
+
+
+payment and Support information : Manoj NIT Admin 9154861171
+
+Aws course fee 
+9am Batch Avinash sir 
+With videos 14000
+Without videos 10000
+
+*Bank Details*
+Name: Naresh i Technologies
+A/C No. 50200022639833
+Bank: HDFC
+A/C Type: Current Account
+IFSC Code: HDFC0001627
+MICR Code: 500240035
+Branch Code: 001627
+Branch:  Ameerpet
+
+Note: If you want to use Phonepe or Google Pay then follow the below steps.
+
+You can find the option Bank Transfer in Phonepe and Google pay. There you can enter our bank account number and you can transfer the amount.  Please mention your Name on the receipt and send a email once the payment is done to support@nareshit.com.
+  
+For any Queries, You can Reach us on email support@nareshit.com 
+
+Please share your feedback to Mr. Manoj NIT Admin 
+
+Thanks and Regards
+Manoj NIT Admin 9154861171
+
+==============================================================
+
+Free Coupons for Linux and jenkins : 
+
+https://www.udemy.com/course/jenkinswithavinash/?couponCode=AWSAVINASH9AM
+https://www.udemy.com/course/linuxwithavinash/?couponCode=AWSAVINASH9AM
+
+
+==============================================================
+
+D: 25/08/2023
+
+URL : aws.amazon.com/free
+
+Email ID : Enter your email id, We call this user as "root user"
+Account Name : Setup account name. THis help us to identify account and its purpose / environment.
+
+
+Example Environments : 
+Training/Sandbox
+Dev
+SQA
+SIT
+UAT
+PRD
+
+Setup Password : Strong and secure password.
+
+Contact information : 
+--> Personal : Select this
+--> Professional
+
+Enter your address, pincode, pancard..
+
+Complete the Payment information : 
+--> Credit Card / Debit Card : Visa / Master card / Rupay / amex / discovery
+--> Deducts 2 INR.. with in 72 hrs, refund back to account.. 
+--> Verify International transactions status. : Enable 
+
+Identity verification : 
+--> Phone verification (call / sms) : Call --> AWS will call you, answer it, You will get 4 digit pin on your screen.. Enter that 4 digit IVR.. 
+SMS : AWS will send SMS, enter the code..
+
+
+Choose Support Plan : 
+
+1. Account and Billing related ==> Free for all support plans.. 24x7, 365 days, phone, email and chat support.. 
+2. Technical queries ==> Depends on the Support plan
+
+
+Basic Support Plan : FREE...
+--> Some Advises from AWS trusted Advisor (7 core area checks)
+2 ==> AWS Developer Forums / Re;post, KBs Knowledge Base articles.. 
+
+==
+
+Developer SP : 29$/Month..
+--> One user can raise ticket, THis user can raise unlimited tickets... Only Email Support..
+--> 12-24 Local business hours (8am-8pm)
+--> An associate may provide support..
+--> Some Advises from AWS trusted Advisor (7 core area checks)
+
+General guidance: < 24 hours
+System impaired: < 12 hours
+
+=====
+
+Business SP : 100 $/Month..
+--> Any user can raise ticket, We can raise any number of tickets.. 24x7, 365 days.. Email, Phone and chat support..
+--> Full Trusted advisor checks
+--> Sr AWS engineer.. 
+
+General guidance: < 24 hours
+System impaired: < 12 hours
+Production system impaired: < 4 hours
+Production system down: < 1 hour
+
+====
+
+Enterprise on-ramp : 5000$/Month
+--> Any user can raise ticket, We can raise any number of tickets.. 24x7, 365 days.. Email, Phone and chat support..
+--> Sr AWS engineer..
+--> Supports Multiple AWS accounts..
+--> Full Trusted advisor checks
+
+General guidance: < 24 hours
+System impaired: < 12 hours
+Production system impaired: < 4 hours
+Production system down: < 1 hour
+Business-critical system down: < 30 minutes
+
+====
+
+Enterprise SP : 15000$/Month..
+--> Any user can raise ticket, We can raise any number of tickets.. 24x7, 365 days.. Email, Phone and chat support..
+--> Full Trusted advisor checks
+--> Sr AWS engineer..
+--> Supports Multiple AWS accounts..
+--> Dedicated TAM (Technical Account manager)
+--> AWS Trainings periodically
+--> AWS Anually conduct OPERATIONAL and ARCHITECTURAL reviews.
+
+
+General guidance: < 24 hours
+System impaired: < 12 hours
+Production system impaired: < 4 hours
+Production system down: < 1 hour
+Business/Mission-critical system down: < 15 minutes
+
+====
+
+
+Login : aws.amazon.com/console
+
+Help video : https://www.youtube.com/watch?v=Yh076-09wzk
+
+
+
+Who want the bank account details msg to admin number 9154861171
+
+
+
+
+=================================================================================
+
+D: 28/08/2023
+
+
+Enable MFA on root account. Highly recommended.
+
+IAM : Identity and Access Management :  User management in AWS.
+S3 : Simple Storage Service : AWS version of google Drive. 
+EC2 : Elastic Compute Cloud : Place where we can launch and manage our Servers.
+RDS : Relational Database Service : Place where we can run our databases.
+VPC : Virtual private Cloud : Networking module on AWS. 
+Route53 : DNS Service : Map names to Ips and vice versa..
+
+
+Root User : he will have unrestricted access on our aws account.. 
+--> Account level operation
+--> All applications and services full access..
+
+You are working for a project. You are the lead. 
+
+3 members.. : 
+
+1. This huy need to manage only Storage : S3FullAccess : A UN and PWD
+2. THis guy need to manage only Servers : EC2FullAccess : A UN and PWD
+3. We are okay to provide full access on aws services. : AdministratorAccess : UN & PWD
+
+==> Least Privilages mechanism : Provide permissions to perform only his job related activities. Dont provide any additional permisisons.
+
+
+--> Setup Alias name for your own aws account.
+--> Setup password standards for your aws account.
+
+
+Task 1 : Create an IAM User, Provide him "S3FullAccess", Now Login as this IAM User and verify his access on s3 service (Create a bucket). Now go to ec2/rds and try to view/create resources, it should not allow.
+
+
+Task 2 : Create an IAM User, Provide him "RDSFullAccess", Now Login as this IAM User and verify his access on RDS service (Click on create Database, should show option to create). Now go to ec2/s3 and try to view/create resources, it should not allow. 
+
+
+=============================================================================================
+
+
+How we can secure root account.
+
+1. Enable MFA
+2. Setup strong password and rotate it periodically
+3. Dont generate programitic keys / delete if already generated for root user.
+4. Dont use this root user for Day to day activities. Use IAM users.
+
+
+AdministratorAccess : Provides full access to AWS services and resources.
+
+Policy : Set of permissions on AWS account. These policy writtens in JSON format.
+
+1. AWS managed policy : Based on Service and its use cases AWS provided this automatically. We cannot alter / delete.
+
+2. AWS managed policy - Job Function : Based on Standard Job roles we have in market AWS provides this. Comibination of multiple services. We cannot alter / delete. 
+
+3. Custome managed policy : Customer can create a policy based on his requirement. Customer can modify / delete this.
+
+
+
+S3 : IAM user with S3FullAccess : 
+
+Implicit Allow : User can access the services based on allocated polocies. If policy dont have any entried related to any of the service, it wont allow.
+
+Explicit Deny : You allow 100 times but deny statement only one time => deny will take effect.
+Deny will always have highest priority in permissions evaluation.
+
+
+I Need an IAM user, he needs FullAccess on aws account.. But no permissions on S3 Service.
+
+AWSPowerUserAccess : Allow all the services and application, but not IAM Service.
+
+
+
+
+TasK : Create an IAM user, provide him "AdministratorAccess" but Deny access on "S3 Service".
+
+Task 2 : Create an IAM user, provide him "AdministratoAccess", Use this user thoughout the course.
+
+Task 3 : Create an IAM user and allocate him "S3FullAccess".. Create a policy that can allow only MFA operations and associate that policy to this Task 3 user. This new policy allow user to enable/disable/delete/resync MFA device.
+
+
+--------------------------------------------------------------------------
+
+
+Any information msg to admin number 9154861171
+
+--------------------------------------------------------------------------
+
+D: 30/08/2023
+
+Inline : Not a reusable policy. We can apply policy for specific resource.
+You can add up to 6,144 characters per managed policy.
+Use inline policies instead of managed policies
+You can use as many inline policies as you want, but the aggregate policy size can't exceed the character quotas. 
+
+The maximum limit for attaching a managed policy to an IAM role or user is 20.
+
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length
+
+
+
+CloudTrail : Logging service in AWS. It logs everything (including refresh also).
+--> Enabled by default. We dont have option disable it. 
+--> Defaultly it can store last 90 days logs.
+
+Credentials Report : Gives complete user information i.e; user creation date, password last used, pwd expiration date, accesskey & secretkey information and mfa info also..
+
+
+Permissions Boundary : AWS supports permissions boundaries for IAM entities (users or roles). A permissions boundary is an advanced feature for using a managed policy to set the maximum permissions that an identity-based policy can grant to an IAM entity. An entity's permissions boundary allows it to perform only the actions that are allowed by both its identity-based policies and its permissions boundaries.
+
+------------
+
+Task 1 : Create an IAM user, Provide him "AdministratorAccess" policy. Now try to access "Billing Dashboard". It gives error. 
+Fix this error and provide him billing access.
+
+Task 2 : Create an IAM user, Privide him "S3FullACCESS", but i want to limit him to work only on "Mumbai region / ap-south-1".
+
+Add a condition on top of s3 full access, 
+
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:RequestedRegion": "ap-south-1"
+		
+
+Task 3 : Create an IAM user, Privide him "S3FullACCESS", but i want to limit him to work only from  specific network. 
+
+183.82.125.5/32
+
+
+

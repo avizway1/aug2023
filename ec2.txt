@@ -1,0 +1,39 @@
+=====================================================================================
+
+EC2 : Elastic Compute Cloud : Server class :  Region specific service
+
+CPU, Memory/RAM, Storage/HDD/SDD, Network (wifi, bt, NIC/ENI)
+
+Instance = Server = Azure VM = Compute engine = box
+
+CLient Class OS : Win7, win10
+Server Class OS : Windows server 2008 r2, 2012, 2012 r2, 2016, 2019
+
+On-Demand ec2 instances : When we have unpredictable workloads.. Testing our application for the firsttime.. "FREE TIER ELIGIBILITY"
+Pricing : /Sec (With min of 60 Sec)
+
+Reserved ec2 instances : When out workload is stable and predictable.. For longer durations.. We can reserve the capacity for 1yr/3yr.. "NO FREE TIER ELIGIBILITY""
+
+	Standard RI : We cannot change config during the period. 
+	Convertable RI : We can change/exchange the config during the period.
+
+Pricing : 
+Full Upfront : Pay 100% as onetime. 
+Partial upfront : Pay 30-50% as onetime, Then remaining amount pay monthly basis with redused hourly price, based on usage.
+No upfront : Pay everything monthly basis. 
+--> AWS Marketplace : We can sell our resources. 
+
+Spot instances : When we have flexible start/stop durations.. No Criticaldata/ application is delivering..!!  Test env.. 
+Bid your price against AWS pricing. If our quoted price is euqual or greater than aws pricing, we will get the instance.
+--> high confi server at low cost for temp requ.
+"NO FREE TIER ELIGIBILITY"
+--> quoted price is euqual or greater than aws pricing, we will get the instance.
+--> If price increased, AWS will terminate(delete) our instance.
+
+1 hr 50 Min : Price increased, AWS Terminated our Instance : 1 Hr
+1 hr 50 Min : Price not increased, You Terminated our Instance : 1 Hr 50 Min
+
+______________________________________
+
+
+
