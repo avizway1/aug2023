@@ -35,5 +35,170 @@ Bid your price against AWS pricing. If our quoted price is euqual or greater tha
 
 ______________________________________
 
+Instance = Azure VM = GCP Engine = Virtual Machine = Box = Server 
+
+
+Step 1 : Add Tags
+
+Step 2 : Choose AMI (Windows, Amazon Linux, redhat, suse, ubuntu....)
+
+Step 3 : Instance type (t2.micro) (CPU and Memory)
+
+Step 4 : Create aKeypair (Default Username and password to login)
+
+Step 5 : network configuration (AZ/PublicIP/What ports you want to open)
+
+Step 6 : Choose Storage options (SSD/HDD/Magnetic)
+
+
+______________________________________
+
+
+Only On-Demand ec2 instances comes under free tier eligibility.
+** Fix to one region. ap-south-1
+
+Windows ec2 instance launch : 
+
+Step 1 : Choose an AMI (Amazon Machine Image)	: Operating System : Windows server 2016 base
+
+Step 2 : Choose an Instance type 		: vCPU, Memory(RAM), Network perf
+==> t2.micro
+
+
+General Purpose : Stable/balanced performance of compute, memory and network resources.
+Type : t2, t3, t4, m5
+
+Compute Optimized : We will get more CPU performances from these instances. We will have high perf processors in these instances.
+Type : c4, c5, c6  (Compute / CPU)
+
+Memory Optimized : We will get more RAM perf. Workloads required to process large set of data via memory.
+Type : r4, r5, r6, x1, z1, u1 (RAM)
+
+GPU Optimized / Accelerated computing : We will get more graphic processings, Efficient for data pattern matching, High level gaming.
+Type : p2, p3, p4, g3, g4, f1
+
+Storage optimized : we will get more Storage/ Hard Disk performance. FOr the application required more IOPS, we use this types.
+Type : d2, d3, i3
+
+m5.large	: 2 CPU, 8 RAM
+c5.xlarge	: 4 cpu, 8 ram
+t4g.medium	: 2 cpu, 4 ram
+
+Maintenance windows : Sat 03 AM IST.. : Greenzone window : CRQ (Change Request)
+
+Step 3 : Configure additional settings
+	VPC, ROles, userdata
+
+	Instance Termination protection : Enable (Protect against accidental termination)
+	Shutdown behaviour : STOP
+
+Step 4 : Choose storage
+
+	root volume : volume that contains Operating system : 30 gb for windows
+
+Step 5 : Add Tags : COmbination of Key and Value pairs.
+
+Name : 
+Project : 
+Platform : Windows / Linux
+COst center : AAZAA
+
+Step 6: Configure Security Group : Security group acts as Firewall at Instance level.
+
+OS Ports/protocols : 0 - 65535
+
+Windows : RDP : 3389 : 
+Linux : SSH : 22
+Webserver : http : 80
+Secure web : https : 443
+mysql : 3306
+mssql : 1433
+NFS : 2049
+
+source : From where you want to connect to this instance.
+MyIP : It picks currently connected network ip address. No one can connect to the server apart from this particular network users.
+Custom : We can give any network IPs. 
+Anywhere : Anyone with valid credentials can connect to the server. (username and pwd)
+
+Step 7 : Review and launch with keypair.
+
+Keypair : Key pair contains public key and private key. (.pem)
+
+AWS Holds the Public Key. This will be stored in our launched ec2 instances.
+Customer/WE holdes the Private key. Used to decrypt/generate the password for initial instance connect.
+
+Public IP : Unique across the globe : Use this to connect to your instance.
+Private IP : Unique with in the aws network : 
+
+COnnect to Windows Instance :
+
+--> Open "run" , type "mstsc" , CLick enter.. Provide instance "Public IP".
+--> Choose instance "connect', choose "RDP Client", "Download remote desktop file"
+
+MAC : https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12
+
+
+start/stop : 10 days work.. 1 month.. : Stop, Start the server
+Terminate : Delete the server..
+
+
+Windows : No addl softwares required..  Click on start --> search "remote desktop connection"
+Computername/ip : provide public IP
+Username : Administrator
+Pwd : get it using keypair
+
+==> open run (Windows Key + R) --> type "mstsc"
+Computername/ip : provide public IP
+Username : Administrator
+Pwd : get it using keypair
+
+==> Select Instance, Click on "connect" and Select "RDP Client", click on "Download remote desktop file", open the downloaded file.
+
+
+Mac : Goto appstore --> search for "microsoft remote desktop" software.
+Computername/ip : provide public IP
+Username : Administrator
+Pwd : get it using keypair
+
+________________________
+
+Task : Launch windows ec2 instance and using keypair get connect to ec2 instance.
+
+Task 2 : Change the password of "Administrator", Disconnect from the instance. 
+Now try to login to ec2 instance using "keypair pwd", "Custom password"../
+
+Task 3 : "Create a new user" with in the ec2 instance and provide him "Local administrator rights", also provide him "Remote desktop permissions".. Take a session with this user along with administrator.
+
+____
+
+
+
+
+AWS @ 9:15 AM (IST) By Mr.Avinash
+Day-1 https://youtu.be/1JHp0IL6CUQ
+Day-2 https://youtu.be/iyEDo6sE1Dk
+Day-3 https://youtu.be/igR86Q8QBlM
+Day-4 https://youtu.be/cTZsf_Jt1PA
+Day-5 https://youtu.be/hIKKh5H1qZg
+Day-6 https://youtu.be/IPxQlLVZUxg
+Day-7 https://youtu.be/9Qcvwpk0PPM
+Day-8 https://youtu.be/W6ZjibBpimY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
