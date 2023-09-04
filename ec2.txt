@@ -190,6 +190,161 @@ https://www.udemy.com/course/linuxwithavinash/?couponCode=AUG915AM
 
 
 
+======================================================================
+
+D: 04/09/2023
+
+
+Step 1 : Add some Tags
+
+Step 2 : CHoose a Linux AMI (Amazon Linux)
+
+Step 3 : choose Instance Type (t2.micro)
+
+Step 4 : Choose an Existing keypair / Create a new keypair.
+
+Step 5 : Network Settings
+Security group : It acts as firewall at Instance level. 
+
+Linux : SSH (Secure Shell) : Port No : 22
+
+Step 6 : Review and create. 
+
+
+-----------
+
+
+How to Connect to Linux Instance :
+
+--> Select Instance, click on "Connect" --> "ec2 instance connect" --> "ec2-user" --> Connect. (We don't use this in realtime)
+___
+
+--> We can use windows Cmd prompt to connect to Linux Instance : Install "OpenSSH" in your laptop. 
+	--> apps&features --> optional features --> openssh client--> Enable/Install.
+
+==> https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse
+
+==> ssh -i keypair.pem ec2-user@publicip/dns
+ssh -i "linuxkp.pem" ec2-user@ec2-3-108-53-198.ap-south-1.compute.amazonaws.com
+
+__
+
+Putty : Putty Don't support .pem format files.. Putty need .ppk (putty private key) file format. 
+1 --> generate a .ppk file, before launching linux instance and use the .ppk file to connect using putty application.
+2 --> Convert the existing .pem file to .ppk file using PuttyGEN application. 
+
+https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html	--> Download putty
+
+__
+
+Install "GIT for Windows", Then use GIt terminal to connect. 
+
+https://git-scm.com/download/win
+
+--> go to the location where we have the keypair, "Git Bash here"
+
+
+Bad Permissions error :  chmod 400 keypairname.pem  (Works with GIT for Windows)
+
+https://stackoverflow.com/questions/8193768/unprotected-private-key-file-error-using-ssh-into-amazon-ec2-instance-aws
+___________________________
+
+Linux Instances : Default username : ec2-user  / redhat / ubuntu
+
+Task : Launch Linux ec2 instance and get connect to it.
+
+============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+whoami		--> tells us as what user we are working.
+sudo		--> allow user to execute the command with root level permissions
+sudo su		--> Switch to root user
+exit		--> Exit from root user to ec2-user
+clear		--> Clears the screen
+
+ls			--> List the files/folders
+ls -a		--> List all including hidden files
+pwd			--> Print working directory
+mkdir		--> Create a Directory/Folder
+touch 		--> o bytes file/ plain file
+cd			--> Change directory
+cd ..		--> To come one step back from current path.
+rmdir		--> remove directory, if it is empty.
+rm -rf foldername/	--> Delete a directory that contains files
+
+/dev is the location all newly added volumes stores. to navigate cd /dev/ then enter "ls -ll" it shows all directory files properties.
+
+init 6		--> to reboot linux instance
+init 0		--> to shoutdown an ec2 instance
+
+copy and paste :  cp
+cut and paste  :  mv
+
+to rename a file we use "mv" command :  mv oldfilename newfilename
+
+_________________________
+
+vim / vi / nano
+
+VIM Editor : 
+
+vim filename	--> Open this file in VIM editor
+
+Press I		--> INSERT Mode
+Press ESC		--> ReadOnly Mode
+:wq				--> Write and Quit (Write changes to file and quit the editor)
+:q!				--> Quit the Editor without writing the changes
+
+
+
+=====================================
+
+
+https://www.udemy.com/course/linuxwithavinash/?couponCode=AUG2023
+
+
+https://www.udemy.com/course/jenkinswithavinash/?couponCode=AUG2023
+
+=====================================
+
+https://linuxsurvival.com/
+
+____________________________________________________________________________________
+
+Req: Make this linux Instance as Web Server (Apache).
+
+rpm : Redhat package manager
+yum : Yellowdog Update manager
+
+yum install httpd -y
+service httpd status			--> httpd webserver service status
+service httpd start/stop/restart
+chkconfig httpd on				--> Makes httpd as logon service.
+
+path : /var/www/html/
+
+cd /var/www/html/
+
+
+Tool to Move the files to amazon linux ec2 instance : WinSCP
+
+--------
+
+
+Task 1 : Launch an amazon linux 2, make it as webserver and deliver custom web content.
+
+Task 2 : Launch an Amazon Linux 2, install nginx and deliver custom web page.
+
+
 
 
 
