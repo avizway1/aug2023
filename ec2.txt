@@ -44,9 +44,9 @@ Step 2 : Choose AMI (Windows, Amazon Linux, redhat, suse, ubuntu....)
 
 Step 3 : Instance type (t2.micro) (CPU and Memory)
 
-Step 4 : Create aKeypair (Default Username and password to login)
+Step 4 : Create a Keypair (Default Username and password to login)
 
-Step 5 : network configuration (AZ/PublicIP/What ports you want to open)
+Step 5 : Network configuration (AZ/PublicIP/What ports you want to open)
 
 Step 6 : Choose Storage options (SSD/HDD/Magnetic)
 
