@@ -185,11 +185,6 @@ Day-7 https://youtu.be/9Qcvwpk0PPM
 Day-8 https://youtu.be/W6ZjibBpimY
 
 
-
-https://www.udemy.com/course/linuxwithavinash/?couponCode=AUG915AM
-
-
-
 ======================================================================
 
 D: 04/09/2023
@@ -255,15 +250,7 @@ Task : Launch Linux ec2 instance and get connect to it.
 
 ============================================================================================================
 
-
-
-
-
-
-
-
-
-
+D: 05/09/2023
 
 whoami		--> tells us as what user we are working.
 sudo		--> allow user to execute the command with root level permissions
@@ -308,17 +295,19 @@ Press ESC		--> ReadOnly Mode
 
 =====================================
 
-
-https://www.udemy.com/course/linuxwithavinash/?couponCode=AUG2023
-
-
-https://www.udemy.com/course/jenkinswithavinash/?couponCode=AUG2023
+https://www.udemy.com/course/linuxwithavinash/?couponCode=AUG915AM
 
 =====================================
 
-https://linuxsurvival.com/
+Task : https://linuxsurvival.com/ (complete atleast 2 modules)
 
-____________________________________________________________________________________
+==========================================================================================
+
+
+
+
+
+
 
 Req: Make this linux Instance as Web Server (Apache).
 
@@ -352,7 +341,12 @@ Task 2 : Launch an Amazon Linux 2, install nginx and deliver custom web page.
 
 
 
+Dear Students, 
 
+*Fill This Google Form*
+https://bit.ly/AWS9AMAV
+
+For sand box access
 
 
 
