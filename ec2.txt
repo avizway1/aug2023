@@ -285,6 +285,7 @@ vim / vi / nano
 VIM Editor : 
 
 vim filename	--> Open this file in VIM editor
+vim test.txt
 
 Press I		--> INSERT Mode
 Press ESC		--> ReadOnly Mode
@@ -303,11 +304,7 @@ Task : https://linuxsurvival.com/ (complete atleast 2 modules)
 
 ==========================================================================================
 
-
-
-
-
-
+D: 06/09/2023
 
 Req: Make this linux Instance as Web Server (Apache).
 
@@ -323,6 +320,9 @@ path : /var/www/html/
 
 cd /var/www/html/
 
+Apache defaultly runs on port 80, if you want to change to diff port, we need to modify the httpd.config file. Change listen option, Make sure you restart httpd service.
+--> Open required port number in security group.
+
 
 Tool to Move the files to amazon linux ec2 instance : WinSCP
 
@@ -333,6 +333,159 @@ Task 1 : Launch an amazon linux 2, make it as webserver and deliver custom web c
 
 Task 2 : Launch an Amazon Linux 2, install nginx and deliver custom web page.
 
+
+EIP / Elatic IP Address : With the help of EIP, we can give a static public ip address to our ec2 instance.
+--> If you perform stop & start, this EIP wont change.
+
+==> We cannot change instance type when it is in running state. 
+We should stop instance to perform upgrade/downgrade.
+
+===========================================================================
+
+
+
+
+
+
+
+
+
+
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
+
+How to deal with Volumes
+
+root volume : COntains OS : gp2,gp3, io1, io2 and magnetic
+
+IOPS : Input and output Operations per second
+
+GP2, Gp3 : general Purpose :SSD: Suitable for most of the common workloads.
+io1, io2 : Provisional IOPS :SSD: Gives best perf am,ong all storage options. 
+sc1 ($), st1($$) : HDD : wont support boot : Best throughput values. : log processing/bigdata
+magnetic : standard : We dont use this.. : Cheapest storage 
+
+Windows : FAT, NTFS and ReFS
+Linux : ext3, ext4, xfs
+
+EBS : Elastic Block Storage : Block based storage : Designed to run OS.. 
+
+root : SSD and magnetic is supported.
+Addl volume : SSD, HDD and magnetic
+
+
+Step 4 : CHoose Storage
+
+--> EBS : Elastic Block Storage
+SSD / HDD / Magnetic
+
+
+root Volume : COntains OS : gp2, gp3, io1, io2 and standard/magnetic
+Additional volume : all root supported + st1, sc1
+
+General Purpose SSD : (gp2 / gp3) : Low latency interactive applications, Dev and test environment..!!
+Min : 1 GiB, Max: 16 TiB... Max IOPS: 16,000 IOPS
+gp2 --> works 1 : 3 ration (1 gb volume = 3 iops), with min of 100..
+
+for gp3, we have an advantage, we can mention/choose required IOPS count.
+
+__
+
+Provisioned iops : (io1 & io2) : workload that requires Specific IOPS count.. or if we need more than 16,000 iops for our ec2 instance.. I/O Intensive database workloads..
+Min : 4 GiB, Max: 16 TiB... Max IOPS: 64,000 IOPS
+--> It provided highest performance among all. 
+
+io2 Block Express volume : Min : 4 GiB, Max: 64 TiB...
+Supports 256,000 IOPS.. 
+__
+
+Magnetic : Standard : Less freq accessed data, Low cost storage solutions.. 
+Min : 1 GiB, Max: 1 TiB...
+__
+
+Throughput optimized HDD : st1 : Bigdata, Data warehousing, log processing.. 
+Size : Min 125 GiB - 16 TiB.. IOPS : 500.. Throughput : 500 MB/S..
+
+Cold HDD : sc1 : THroughput orientes storages, but with Less Frequently accessed.. Lower cost than st1.. 
+Size : Min 125 GiB - 16 TiB.. IOPS : 250.. Throughput : 250 MB/S..
+
+
+Free Tier : 30 gb Gp2 and standard storage.. 
+
+--> 20% of volume size (or) 5 gb.. WHichever is highest
+
+** Need to perform OS level operations to make additional volumes available.
+--> Disk Management --> diskmgmt.msc --> choose volume --> make it online --> Initilize disk --> SImple volume --> NTFS/FAT --> Create
+
+
+Windows : FAT, FAT32, NTFS, ReFS
+Linux : ext3, ext4, xfs
+
+
+grab the name of new volume : /dev/xvdb
+
+lsblk		--> List block based devices
+df -Th		--> List the available volumes
+
+/dev/xvda1	--> root volume (/)
+/dev/xvdf	--> new Volume name --> ##this is the volume name that attached to my instance.
+
+In windows OS, we mount new volumes to drive letters.. But in Linux OS, We mount volumes to Directory. 
+
+mkdir newvolume
+
+file -s /dev/xvdf  	
+
+--> If this command returns with "data", no file system.
+--> If this returns ext3/xfs filesystem.. We have a file system.
+
+mkfs -t xfs /dev/xvdf		--> Make file system and write it to Additonal volume
+
+mount /dev/xvdf newvolume/	--> mount addl volume to directory
+
+=================
+
+--> Above mount is temp mount only.. it won't available after the instance reboot.
+--> To make this volume perm mount to the directory, Add entry in "/etc/fstab" file.
+--> Get the entry information from "/etc/mtab" file. 
+
+--> cat /etc/mtab		--> Grab the entry related to newly added addl volume
+
+example entry : /dev/xvdb /home/ec2-user/newvolume xfs rw,relatime,attr2,inode64,noquota 0 0
+
+--> vim /etc/fstab.. Write the above entry, save and quit the editor. (Do not edit the existing entry).
+
+mount -all
+__________
+
+--> Increase the volume size the "Cosole" first, then execute the below command..!!
+
+We can use "xfsprogs" to increase existing volume size. 
+
+yum install xfsprogs
+
+--> xfs_growfs -d /volume-Mountpoint
+--> xfs_growfs -d /home/ec2-user/newvolume
+
+
+===========================================================================
+
+--> Increasing volume is possible, But redusing volume is not possible.
+
+=============================================================================
+
+Task : Launch an ec2 instance, Create a 1gb volume, associate it with ec2 instance.. Make 1 gb volume available at os level and write some data into it. (Reboot and verify)
+df -Th after reboot, also should show 1gb volume.
+
+Task 2 : Launch another ec2 instance in same AZ as existing ec2 instance (task 1 instance).. Detach the volume from instance 1 and attach it to newly launched ec2 instance. You should be able to see all the data.
+
+Task 3 : Launch a Windows ec2 instance, Create a 2 gb volume, associate it with ec2 instance.. Make 2 gb volume available at os level and write some data into it. (Reboot and verify). 
+
+
+-- : Possible with your own aws accounts.
+
+Task 4 : Add 2 more gb size to Task 3 Volume and extend volume at OS level.
+
+Task 5 : For task 1 instance, Increase the size of 1gb volume to 2 gb and verify with df -Th.
 
 
 
