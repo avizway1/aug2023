@@ -328,7 +328,6 @@ Tool to Move the files to amazon linux ec2 instance : WinSCP
 
 --------
 
-
 Task 1 : Launch an amazon linux 2, make it as webserver and deliver custom web content.
 
 Task 2 : Launch an Amazon Linux 2, install nginx and deliver custom web page.
@@ -342,14 +341,7 @@ We should stop instance to perform upgrade/downgrade.
 
 ===========================================================================
 
-
-
-
-
-
-
-
-
+D: 07/09/2023
 
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html
 
@@ -478,14 +470,12 @@ df -Th after reboot, also should show 1gb volume.
 
 Task 2 : Launch another ec2 instance in same AZ as existing ec2 instance (task 1 instance).. Detach the volume from instance 1 and attach it to newly launched ec2 instance. You should be able to see all the data.
 
-Task 3 : Launch a Windows ec2 instance, Create a 2 gb volume, associate it with ec2 instance.. Make 2 gb volume available at os level and write some data into it. (Reboot and verify). 
 
+Task 3 : Launch a Windows ec2 instance, Create a 2 gb volume, associate it with ec2 instance.. Make 2 gb volume available at os level and write some data into it. (Reboot and verify). 
 
 -- : Possible with your own aws accounts.
 
 Task 4 : Add 2 more gb size to Task 3 Volume and extend volume at OS level.
-
-Task 5 : For task 1 instance, Increase the size of 1gb volume to 2 gb and verify with df -Th.
 
 
 
@@ -500,6 +490,30 @@ Dear Students,
 https://bit.ly/AWS9AMAV
 
 For sand box access
+
+
+
+addl volume name : /dev/xvdf
+
+file -s /dev/xvdf
+
+Data : no file system
+XFS file system
+
+mkfs -t xfs /dev/xvdf
+
+
+/dev/xvdf /home/ec2-user/newvol xfs rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota 0 0
+
+
+
+
+
+
+
+
+
+
 
 
 
