@@ -478,36 +478,89 @@ Task 3 : Launch a Windows ec2 instance, Create a 2 gb volume, associate it with 
 Task 4 : Add 2 more gb size to Task 3 Volume and extend volume at OS level.
 
 
+==========================================================================================
+
+D: 08/09/2023
+
+Instance 1 in ap-south-1a ---> Instance 2 in ap-south-1a ==> Detach from instance 1 and attach to instance 2.. 
+
+Instance 1 in ap-south-1a ---> Instance 2 in ap-south-1b ==> Detach from instance 1 and attach to instance 2 is not possible as both are running in diff AZs.. 
+Choose the volume --> Take a Snapshot --> Create a volume from snapshot, while creating choose ap-south-1b --> we'll get volume in 1b --> Attach to Instance 2 running in ap-south-1b
+
+Instance 1 in Mumbai : ap-south-1a ---> Instance 2 in N Virginia : us-east-1a ==> Detach from instance 1 and attach to instance 2 is not possible as both are running in diff regions.. 
+Choose the volume --> Take a Snapshot --> Copy the snapshot to desired region (NV) 
+--> Create a volume, while creating choose us-east-1a --> volume in 1a --> Attach to Instance 2 running in N Virginia : us-east-1a.
+(Data transfer from region to region cost us)
+
+
+Instance 1 in AWSACC1 : Mumbai : ap-south-1a ---> Instance 2 in AWSACC2 : Mumbai : ap-south-1a ==> Detach from instance 1 and attach to instance 2 is not possible as both are running in diff aws accounts, regions.. 
+Choose the volume --> Take a Snapshot --> share the snapshot to another aws account 
+--> Create a volume, while creating choose ap-south-1a in acc2
+
+Instance 1 volume need to share with everyone.. --> Create a snapshot --> Share to "Public" --> 
+
+
+MultiAttach : https://www.youtube.com/watch?v=2j8R3ajSo3s
+
+** We cannot decrease the size of an EBS volume. Only increase is possible.
+EBS VOlumes : Always use EBS volumes only.
+
+
+Snapshot : Backup copy of an EBS volume.
+
+https://aws.amazon.com/blogs/storage/automating-amazon-ebs-snapshot-and-ami-management-using-amazon-dlm/
+
+
+--> Snapshots are point-in-time copies.
+--> Snapshots stores in S3 platform (Not in your s3).
+--> Can we view what data we have inside snapshots..?? NO
+--> Snapshot Works with Incremental backup mechanism.
+--> If our volume is Encrypted, Snapshot also Encrypts automaticALLY. 
+--> When we are launching/creating a volume from encrypted snapshot, volume also encrypts automatically.
+--> We cannot share an Default Master key Encrypted snapshot.
+--> If we are using Custom encryption key, we can share snapshot with another aws account, but we need to provide permissions on encryption key also to another aws account.
+
+--> How can we encrypt an existing un-encrypted volume.
+Ans ; Create a snapshot of un-encry volume, then create a volume from that snapshot, enable Encry while creating.
+
+============================================================================================
 
 
 
+DLM : Data lifeCycle Management : Designed to automate the snapshot /AMI creation.
+
+With the help of TAGs we can filter the resources.
+--> Resource : We can configure for "Volumes" or "Entire ec2 instance" or "exclude root volume".
 
 
+key=Backup-Schedule 
+Value=prd/uat/dev
+Value = schedule-1
+value = daily
 
-Dear Students, 
+-----
 
-*Fill This Google Form*
-https://bit.ly/AWS9AMAV
+SOP : Standard Operational Procedure : 
 
-For sand box access
+DLM : Data Lifecycle manager : Automate the snapshot creation process. 
+--> We use "tags" to filter the resources. 
 
+Default Retention Values: 
+Prod : 7 Days
+Non Prod : 3 Days 
 
-
-addl volume name : /dev/xvdf
-
-file -s /dev/xvdf
-
-Data : no file system
-XFS file system
-
-mkfs -t xfs /dev/xvdf
-
-
-/dev/xvdf /home/ec2-user/newvol xfs rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota 0 0
+Fast snapshot restore : Enable fast snapshot restore to ensure that volumes created from snapshots created by this policy instantly deliver all of their provisioned performance.
 
 
+Task : https://aws.amazon.com/blogs/storage/automating-amazon-ebs-snapshot-and-ami-management-using-amazon-dlm/
+
+__________
 
 
+Task 1 : Launch an ec2 instance in ap-south-1a.. Create a "New volume with 1 gb size" in ap-south-1a and attach this volume to ec2 instance and make it available and write some data. Goto AWS console "Increase the volume size to 2 GB", make this 2gb volume available at OS level. Write some data.
+
+Task 2 : Launch Another ec2 instance in ap-south-1b..
+Get the 2gb volume data from instance 1a to newly launch 1b ec2 instance.. Make Same volume available to "1b instance"..!!
 
 
 
