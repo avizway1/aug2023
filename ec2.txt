@@ -525,8 +525,6 @@ Ans ; Create a snapshot of un-encry volume, then create a volume from that snaps
 
 ============================================================================================
 
-
-
 DLM : Data lifeCycle Management : Designed to automate the snapshot /AMI creation.
 
 With the help of TAGs we can filter the resources.
@@ -561,6 +559,103 @@ Task 1 : Launch an ec2 instance in ap-south-1a.. Create a "New volume with 1 gb 
 
 Task 2 : Launch Another ec2 instance in ap-south-1b..
 Get the 2gb volume data from instance 1a to newly launch 1b ec2 instance.. Make Same volume available to "1b instance"..!!
+
+=====================================================================================
+
+D: 09/09/2023
+
+Scenario : 10 ec2 instances.. AV, MS Office, Custom WP, CUstom OS users, Applications, IIS.. 
+
+--> Launching 10 instance : connect to 10 instance and install everything in all 10 instance.. 
+--> 1 ec2 instance : Install everything.. : Keep it as Image : --> Launch "n" number using image..
+
+Client : OS with CIS Benchmarks (Center for Internet Security) : 
+
+*** GoldenAMI = CUstomized AMI.. For WINDOWS : Won't work with keypairs.. We need to change the password.. 
+
+Ec2 instance , Perform customizations --> Create a Golden AMI --> From GAMI we can launch 'n' num of ec2 instance.. 
+
+Similar to Snapshots..
+
+--> We can launch another instance in same region using GAMI.
+--> We can copy Region 1 GAMI to Region 2, And launch an ec2 instance in Region 2. 
+--> We can share GAMI from Acc 1 to Acc 2. 
+--> We can share GAMI to public.
+
+______________________________________
+
+
+How to recover a Linux ec2 instance, if we lost keypair.?
+--> Select the instance, Create a GoldenAMI, Launch new Instance from GAMI, While launching create a new keypair..!! Now youn can use new keyapir to connect to instance. 
+
+For windows instances, we need to depend on SSM (systems manager - runcommand and parameter store) to recover password.
+
+______________________________________
+
+
+
+Task 1 : Launch Linux ec2 instance, Make it as webserver.. Add custom webpages.. Create a 2gb volume and associate it make it perm mount and write some data.. then Create a Golden AMI and Launch instance from GAMI and test output. 
+
+
+Task 2 : Launch a Windows ec2 instance, Connect to it.. CHANGE ADMINISTRATOR PASSWORD, change timezone, change wallpaper, install "putty" software, Install IIS and deliver custom webpage..
+Now, STOP the INSTANCE and create a GoldenAMi. Launch an instance from GAMI, connect and Verify you got all custom settings or not.???
+
+
+Task 3 : How to setup password authentication to ec2-user user instead of keypair authentication.
+https://comtechies.com/password-authentication-aws-ec2.html
+
+Task 4 : launch a linux ec2 instance, Delete the keypair and try to connect to it.!! Fails..
+Now, create a goldenAMI, while launching "NEW KEYPAIR", and try to connect.
+
+
+Task 5 : Launch a new ec2 instance and configure alarm to stop ec2 instance when cpu usage is less than 20% for 5 minutes, also configure to receive alerts when alarm triggers.
+
+
+
+
+
+============================================================================================
+
+
+--> Cloud watch : Service to monitor all AWS resources i.e; s3, ec2, rds.. 
+--> We can monitor CPU, Disk and network for ec2 instance.
+** With Default metrics, we cannot monitor MEMORY Utilisation. 
+--> We can install an CloudWatch agenet and monitor Memory usage aswell. 
+
+--> We have two types of monitorings in AWS.
+==> Basic Monitoring : Free, Enabled by defaultly. 5 Minutes is monitoring interval.
+==> Detailed Monitoring : COST US, Need to enable explicitlty, 1 minute is monitoring interval.
+
+Vertical Scaling : Upgrading / Adding more resources to same Instance. i.e; from t2.micro to t3.medium
+
+To perform vertical scaling in AWS, First stop the ec2 instance, then only we can upgrqade it.
+
+
+#!/bin/bash
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+echo "<h1>This is my first webserver</h1>" > /var/www/html/index.html
+
+
+#!/bin/bash
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+echo "<h1>This is my Second webserver</h1>" > /var/www/html/index.html
+
+-----
+
+EIP : Dedicated Public IPm address for our ec2 instance.
+
+ENI : Elastic network Interface : Additional NIC card for ec2 instance
+
+----
+
+Task : Create a cw dashaboard and add ec2 instance cpu usage, network in and s3 bucket metrics (no of obj & bucket size).
+
+Task 2 : Try to deliver the webpage with the help of Userdata.
+
 
 
 
