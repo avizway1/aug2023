@@ -593,13 +593,10 @@ For windows instances, we need to depend on SSM (systems manager - runcommand an
 ______________________________________
 
 
-
 Task 1 : Launch Linux ec2 instance, Make it as webserver.. Add custom webpages.. Create a 2gb volume and associate it make it perm mount and write some data.. then Create a Golden AMI and Launch instance from GAMI and test output. 
-
 
 Task 2 : Launch a Windows ec2 instance, Connect to it.. CHANGE ADMINISTRATOR PASSWORD, change timezone, change wallpaper, install "putty" software, Install IIS and deliver custom webpage..
 Now, STOP the INSTANCE and create a GoldenAMi. Launch an instance from GAMI, connect and Verify you got all custom settings or not.???
-
 
 Task 3 : How to setup password authentication to ec2-user user instead of keypair authentication.
 https://comtechies.com/password-authentication-aws-ec2.html
@@ -607,15 +604,12 @@ https://comtechies.com/password-authentication-aws-ec2.html
 Task 4 : launch a linux ec2 instance, Delete the keypair and try to connect to it.!! Fails..
 Now, create a goldenAMI, while launching "NEW KEYPAIR", and try to connect.
 
-
 Task 5 : Launch a new ec2 instance and configure alarm to stop ec2 instance when cpu usage is less than 20% for 5 minutes, also configure to receive alerts when alarm triggers.
-
-
-
 
 
 ============================================================================================
 
+D: 11/09/2023
 
 --> Cloud watch : Service to monitor all AWS resources i.e; s3, ec2, rds.. 
 --> We can monitor CPU, Disk and network for ec2 instance.
@@ -657,6 +651,89 @@ Task : Create a cw dashaboard and add ec2 instance cpu usage, network in and s3 
 Task 2 : Try to deliver the webpage with the help of Userdata.
 
 
+____________________________________________________________________________________
+
+
+Vertical Scaling : Upgrading same instance resources.. t2.micro --> c5.2xlarge
+Horizantal Scaling : Distribute application load to multiple ec2 instances.. 
+
+Classic ELB : Layer 4/7 LB.. : Outdated.. : http, https, tcp, udp.. 
+Application ELB : Layer 7 ELB.. : http and https
+Network ELB : Layer 4 ELB.. : TCP, UDP, TLS 
+Gateway ELB : GENEVE / 3rd party security virtual applicances.. 
+
+**Please select at least two Subnets in different Availability Zones to provide higher availability for your load balancer.
+
+** Dont use same Security group for your ec2 instance and Load balancer.
+
+
+For ELBs, We will get DNS Endpoint..
+Roundrobin algorithm.. 
+
+If you want to view IP address of an ELB, 
+--> Navigate to "Network interfaces" and observe, You can get IP of ELB.
+--> nslookup "ELB-DNS-NAME"
+___________________________________________________
+
+Target Group : Each target group is used to route requests to one or more registered targets. When you create each listener rule, you specify a target group and conditions. When a rule condition is met, traffic is forwarded to the corresponding target group.
+
+Application ELB : http and https
+
+Application Load balancing algorithm : 
+--> Round robin
+--> Least outstanding requests
+
+--> We cannot assign a dedicated IP address for our Application ELB.
+
+Network ELB : TCP.. 
+--> Flow Hash algorithm.
+--> We CAN assign a dedicated IP address for our network ELB.
+
+Application LB Supports path based routing, also supports Microservices.
+
+millions req/sec : NLB
+
+ELB Access Logs : Logging on ELB. Destination is s3.
+_________________________
+
+Free Tier : 750 hrs/month
+
+-----------------------
+
+Task : Create alb, and deliver webpapes on port 80, 8888, 8080. 
+
+
+--> what is telnet and how to use telnet, test it with an ec2 instance on port 22.
+
+
+
+
+
+
+==================================================================================
+
+
+Task : Create nlb, and deliver webpapes on port 80, 8888, 8080. 
+
+
+Task 2 : Configure pipeline mechanism between ec2 instances and elb.
+--> Edit your ec2 instance security group and open port 80 for ELB SG
+
+--> When we give direct instance IP, it should not deliver any webpage.
+--> When we give elb dns name, this should work.
+
+
+Task 3 : Create an Alarm on our ec2 instance. Whever CPU usage is more than 80%, configure to Stop ec2 instance.
+
+Task : Try "stress" command to put load on ec2 instance and test high usage.
+
+stress --cpu 1 --timeout 900
+
+To knnow CPU count run this command: nproc
+
+--> Install stress package first, 
+amazon-linux-extras install epel -y
+yum install stress -y
 
 
 
