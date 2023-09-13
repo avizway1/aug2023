@@ -715,7 +715,6 @@ Task : Create alb, and deliver webpapes on port 80, 8888, 8080.
 
 Task : Create nlb, and deliver webpapes on port 80, 8888, 8080. 
 
-
 Task 2 : Configure pipeline mechanism between ec2 instances and elb.
 --> Edit your ec2 instance security group and open port 80 for ELB SG
 
@@ -734,6 +733,23 @@ To knnow CPU count run this command: nproc
 --> Install stress package first, 
 amazon-linux-extras install epel -y
 yum install stress -y
+
+
+=============================================================================================
+
+D: 13/09/2023
+
+
+1. Create a goldenAMI (Make it as webserver)
+2. Create an ELB.  (Create an empty load balancer)
+3. Create an ASG
+	3.1 Create a Launch teamplate (Settings of new ec2 instances : AMI, Instance type, sg, keypair)
+	3.2 create an ASG (when to scale)
+
+
+
+
+
 
 
 
