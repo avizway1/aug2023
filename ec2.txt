@@ -746,7 +746,118 @@ D: 13/09/2023
 	3.1 Create a Launch teamplate (Settings of new ec2 instances : AMI, Instance type, sg, keypair)
 	3.2 create an ASG (when to scale)
 
+________
 
+1 : Create a Golden AMI
+2 : Create a ELB
+3 : Create a Launch template
+4 : Create an ASG with Fixed (2) and test it
+5 : Confiure Scheduled scaling.
+6 : Configure Simple scaling (low usage scaling)
+7 : Configure Versions for Launch Tempplate. 
+-----
+
+ASG : Auto Scaling Group :
+
+--> DYnamic (Step/Simple/TargetTracking) Load 
+--> Scheduled scaling : 
+--> Manual : 
+
+
+ScaleIN : Remove the instance from ASG
+ScaleOut : Add the instances to ASG.
+
+How ASG will choose the instance to terminate if any ScaleIN action triggered..!! 
+
+ASG Termination policy : refer to the image.
+
+
+t2.micro --> Current configuration.. 
+t2.nano..??? How you can do this with 0 downtime..!! 
+
+
+Create a new launch configuration/template.. Associate this with ASG. Terminate the existing instance.. Now new instance will come with updated launch config settings.
+(Set Desired capacity to 2)..!!! 
+
+
+
+=============================================================================================
+
+D: 14/09/2023
+
+EFS : Elastic File System : File Share : Shared Storage solution for Multiple ec2 instances. : 
+--> Network File System : NFS v4.1 : Port 2049
+--> Support only Linux OS 
+--> No Pre Provisioning required.
+--> Add entry in "/etc/fstab" file.  Get entry info from "/etc/mtab" file
+
+mkdir instance1
+
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04f2e91cd10982b8c.efs.ap-south-1.amazonaws.com:/ **mountpoint**
+
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04f2e91cd10982b8c.efs.ap-south-1.amazonaws.com:/ /var/www/html/
+
+==> For windows OS we can use FSx, Works with SMB Protocol (Server message block)
+
+_______________________________________________________________________________________
+
+--> Create a security group and open NFS protocol. 
+			--> Open for entire VPC IP address
+			--> Open for ec2 instance private IP addresses
+			--> Open for everyone (not recommended)
+		** --> Open for ec2 instance Security group (pipeline mechanism)
+
+
+
+Task : Create EFS and Mount it to multiple ec2 instances. Verify by creating some data in that mopunt points.
+
+Task : Launch an ec2 instance, connect to it, Create EFS.. Install httpd in your ec2 instance.. Mount EFS to /var/www/html/ and create index.html... make that EFS mount permanent. 
+==> Now create a GOLDENAMI.. 
+==> Configure ASG with this GOLDENAMI.. COnnect to any of the ec2 instance, modify the content.. this modification should reflect in all instance.. 
+
+============================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+Eventbridge : 
+
+--> Event Driven process
+--> Scheduled process
+--> Trigger both
+
+ Event Bridge : 
+
+ {"version":"0","id":"eec4eda2-6639-e7b3-150d-c6461f1f0686","detail-type":"EC2 Instance State-change Notification","source":"aws.ec2","account":"501170964283","time":"2022-04-08T02:59:33Z","region":"ap-south-1","resources":["arn:aws:ec2:ap-south-1:501170964283:instance/i-00f56eba78b7b4e65"],"detail":{"instance-id":"i-00f56eba78b7b4e65","state":"stopped"}}
+
+ Sample Event : 
+
+ INPUT PATH:
+
+ {"instance-id":"$.detail.instance-id", "state":"$.detail.state", "time":"$.time", "region":"$.region", "account":"$.account"}
+
+ INPUT TEMPLATE: 
+
+ "At <time>, Status of your EC2 instance <instance-id> in the AWS Region <region> has changed to <state>."
+
+ https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+ https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html#eb-cron-expressions
+
+
+Task 1 : Configure Eventbridge to stop an ec2 instance at a particular time using Crontab. (9:15 Am)
+
+Task 2 : Configure to stop an ec2 instance after 5 minutes, trigger an email with custom email format.
+
+Optional Task 3 : Configure to get an alert when someone deleted an s3 bucket / someone deleted data from specific s3 bucket.
+--> You need to configure Cloudtrail data events for the s3 buckets.
 
 
 
