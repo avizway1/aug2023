@@ -819,14 +819,14 @@ Task : Launch an ec2 instance, connect to it, Create EFS.. Install httpd in your
 
 
 
+Plecement Groups : 
+--> Cluster PG
+--> partition PG
+--> Spread PG
 
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
 
-
-
-
-
-
-
+_______________________________________________________________________________________
 
 Eventbridge : 
 
@@ -848,18 +848,30 @@ Eventbridge :
 
  "At <time>, Status of your EC2 instance <instance-id> in the AWS Region <region> has changed to <state>."
 
+----
+
  https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
  https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html#eb-cron-expressions
 
 
-Task 1 : Configure Eventbridge to stop an ec2 instance at a particular time using Crontab. (9:15 Am)
+Task 1 : Configure Eventbridge to stop an ec2 instance at a particular time using Crontab. (10:10 AM)
 
 Task 2 : Configure to stop an ec2 instance after 5 minutes, trigger an email with custom email format.
 
 Optional Task 3 : Configure to get an alert when someone deleted an s3 bucket / someone deleted data from specific s3 bucket.
 --> You need to configure Cloudtrail data events for the s3 buckets.
 
+=========================================================================================
 
+
+ElasticBeanstalk : It provides preconfigured platforms.
+--> Python, java, go, ruby, php, .net
+--> We can deploy/upload our code to this platform. 
+--> AWS Creates ELB, ASG automatically for our instances.
+--> Less customisations at OS level, We cannot deliver multiple applications. 
+--> it comes under PaaS (Platform as a Service)
+
+--> If any customer/client dont want to manage infra to deliver their application, we can suggest beanstalk.
 
 
 
