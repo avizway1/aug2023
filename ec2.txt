@@ -956,7 +956,64 @@ copy data from s3 to ec2		(--recursive)...?????
 
 ==========================================================================================
 
+D : 19/09/2023
 
+Systems Manager run command :
+--> All instance must associated with "SSM ROle". 
+--> OS level, Every instance have an SSM agent.  
+--> Using Tags, We can filter the instances. / We can choose instances manually. 
+
+
+Task : How to recover a Windows instance administraor password if we loss the keypair.
+AWSSupport-RunEC2RescueForWindowsTool
+
+--> Launch a Windows ec2 instance, connect to it, Change ADministrator Password. then Forgot that password.
+Now you need to login to this instance.!!
+
+
+Task : Make linux ec2 instance as webserver without logging to OS level.
+
+Task : Change the timezone of an windows ec2 instance using ssm run command. (tzutil /s "India Standard Time")
+
+======================================
+
+Platform : Windows - WIN
+Platform : Linux - LNX
+		
+[OS]
+[Clinet]
+[Project/application]
+[Environment]
+[Number]
+
+
+OS : Windows - WIN, Linux - LNX
+Client : varies : ABC / XYZ
+Project/App : varies : MOnitoring / db / web / app 
+Enviornment : sandbox / dev / sqa / sit / uat / prd
+Number - 01 / 02 / 001 /002
+
+WIN-BOA-DBS-PRD-002
+
+==========================================================================================
+
+
+Instance store volumes : We don't use this in real environments.   (NO FREE TIER ELIGIBILTY)
+	--> Also called as Ephemeral storages (Temporary storage).
+	--> We cannot STOP/Start the instance.
+	--> Storage will be delivered from underlying host/physical resources.
+	--> If required, we can reboot. We don't loss any data.
+	--> If underlying h/w failure happens, we'll loss all the data.
+
+________________________
+
+Instance Isolation : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjr993FsAyS65uL4QPbGu8n_JcB6Fwq6jDylWglIapsQQjHfbcbir83OT-I-_a-nhvvo8&usqp=CAU
+
+Dedicated and Shared tenancy :
+--> Shared tenancy : underlying hardware shared with multiple customers.
+--> Dedicated tenancy:
+	--> Dedicated instance : Dedicated instance provided by aws. No control on backend process.
+	--> Dedicated host : We can apply licenses at underlying physical resources. Also, we can launch multiple instances on a dedicated host.
 
 
 
