@@ -98,3 +98,90 @@ https://www.davidc.net/sites/default/subnets/subnets.html
 
 _____________________________________________________________________________________
 
+_____________________________________________________________________________________
+
+
+
+VPC : Virtual Private Cloud : Region specific service.. 
+VPC Peering : Enable communication between multiple vpc
+
+
+CIDR : Classless InterDomain Routing : 
+--> How big network we required. 
+--> How many instances/ resources, we gonna launch. (predict)
+
+Public Subnet : Internet facing subnet.. :
+Private Subnet : Non-Internet facing subnet.. : 
+
+How big VPC we required.?		Ans : 800 Instances..  : 192.168.0.0/22
+How many subnets we required within the VPC..?		Ans : 6 (2 public & 4 private)
+How many public SUbnets required within vpc..?		Ans : 192.168.0.0/25 & 192.168.0.128/25
+How many private SUbnets required within vpc.?		Ans : 192.168.1.0/25, 192.168.1.128/25, 192.168.2.0/25 & 192.168.2.128/25
+Are you going to create any subnets in future.?		Ans : Yes (Have some IPs for future use).  
+192.168.3.0/25 & 192.168.3.128/25
+
+ELB -> 2 subnets to run elb (ap-south-1a & ap-south-1b)
+APP -> 2 more subnets (ap-south-1a & ap-south-1b)
+DB -> 2 more subnets (ap-south-1a & ap-south-1b)
+
+
+Pubic Subnets : Place one public-1 subnet in ap-south-1a and public subnet-2 in ap-south-1b.
+Private Subnets : Place Private subnet-1 in ap-south-1a and another one in ap-south-1b.
+
+
+
+Public Subnet : Internet facing.. : ELB, Jump/ Bastian Host.. 
+Private Subnet : DBs, Application, Web servers.. 
+
+Step 1 : Create a VPC.
+	VPC Name : CustomVPC		VPC CIDR : 192.168.0.0/22
+
+Step 2 : Create Subnets within CustomVPC. 
+
+
+Step 3 : Create an Internet Gateway and associate with CustomVPC.
+--> One VPC can contains one IGW.
+
+Step 4 : Create RouteTables and Associate appropriate Subnets, add required routes.
+
+--> PublicRoute : Go to SUbnet Association and choose all "Public SUbnets". Navigate to "Routes" and add a route via IGW. 	 (0.0.0.0/0 --> IGW)
+
+--> PrivateRoute : Go to SUbnet Association and choose "Private SUbnet". (DONT ADD INTERNET GATEWAY).
+
+Step 5 (Optional) : Navigate to Subnets, Choose "Public SUbnet", Actions, "Modify auto assign public ip settings", Enable.
+
+Step 6 (Optional) : Go to VPC, "Edit VPC Settings", and "Enable DNS hostnames" to get DNS host names. Its required for our RDS Clusters.
+
+
+JUMP Server / Bastian Host : Is a Dedicated EC2 instance, Runs in CustomVPC PUblicSUbnet and can be used to connect to all the "Private Subnet" ec2 instances.
+
+___________
+
+
+Task : Create a VPC with 2 Subnets. (1 Public SUbnets and 1 Private Subnets)
+1 Public SUbnets (ap-south-1a)
+1 Private SUbnets (ap-south-1b)
+
+Task  2: Create a VPC with 4 Subnets. (2 Public SUbnets and 2 Private Subnets)
+2 Public SUbnets (ap-south-1a, ap-south-1b)
+2 Private SUbnets (ap-south-1a, ap-south-1b)
+
+\\
+
+
+Task  3 : Create a VPC with 6 Subnets. (2 Public SUbnets and 4 Private Subnets)
+2 Public SUbnets (WEB) (ap-south-1a, ap-south-1b)
+4 Private SUbnets (APP & DB) (ap-south-1a, ap-south-1b)
+
+
+Task : create a CustomVPC, Launch a JUMP Server in CustomVOPC's PUBLIC Subnet (Use WINDOWS AMI), Now launch another EC2 instance (Amazon Linux 2) in CUSTOM VPC's PRIVATE SUBNET. Connect to Linux instance from Jump Server. 
+
+
+Optional task:
+Task  : user task 3 settings and draw.io website and design this diagram.
+https://app.diagrams.net/?splash=0&libs=aws4
+
+
+
+
+
