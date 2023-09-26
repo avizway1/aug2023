@@ -181,6 +181,161 @@ Optional task:
 Task  : user task 3 settings and draw.io website and design this diagram.
 https://app.diagrams.net/?splash=0&libs=aws4
 
+=============================================================================================
+
+D: 
+
+PublicRoute : We need to associate InternetGateway. 
+PrivateRoute without internet : Don't add NAT.
+PrivateRoute With Intenet : Create NAT Gateway and add NAT Gateway.
+
+_____________
+
+Enable Logging at VPC : 
+Flow Logs: We can enable flowlogs at 
+--> VPC Level
+--> Subnet Level
+--> Instance Level
+
+We can choose destination as 1. S3 bucket 2. Cloudwatch Logs groups.
+
+
+
+--------------------------------
+
+permissions for flowlogs role policy:
+
+--> create a policy
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+
+---
+
+Create a role and associate above policy to role you are creating.
+
+Set rust entity as below:
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "vpc-flow-logs.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+
+_____________________________________________________________________________________
+
+
+VPC NAT Gateway (NO FREE TIER ELIGIBILITY): Is designed to provide Internet to private Subnet resources. NAT always runs in custom VPCs public subnet. We need to generate an EIP (Elastic IP). 
+
+Private subnet ec2 instances want to access something from internet / endpoint hosted over the internet / patching purpose it needs internet. 
+
+--> Make sure your edit PrivateRoute, and add an entry with 0.0.0.0/0 via NAT gateway.
+
+____
+
+NAT Instance : Now a days we are not using it.  It is an ec2 instance runs in custom vpcs public subnet, provides internet to private subnet resources.  (TEST IT)
+
+--> We need to takes  care about the Security groups.
+--> Source/destination check must be disabled.
+
+--> Make sure your edit PrivateRoute, and add an entry with 0.0.0.0/0 via NAT Instance.
+
+____________________________________________________________________________________
+
+
+NACL : Network Access Control List : We can allow/deny traffic at Subnet level/AZ level using this NACLs.
+--> We need to takes care about the inbound rules and outbound rules.
+--> one subnet can be member of one NACL at a time.
+
+--> Default NACLs, : all subnets member of this. It allows all the traffic.
+--> New NACLs won't allow any traffic, Defaultly deny everything.  
+
+--> Ephemeral ports / Temporary ports need to opened in NACL. 
+https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-ephemeral-ports
+
+--> Lowest rule number will have highest permissions. 
+
+
+
+Task : Create a NAT Instance and provide internet to PRIVATE SUBNET Instances.
+
+Task 2 : Launch an ec2 instance in "CustomVPC's PUBLIC SUBVNET", make it as webserver.. Test NACLs. 
+
+Task 3 : Launch a LINUX Instance in PUBLIC SUBNET, Call/use it as JUMP Server, Now Launch another Linux Instance in CUSTOMVPC PRIVATE SUBNET.
+Connect to the Private Linux instance from Public Linux instance.
+
+
+
+
+====================================================================
+
+
+
+Endpoints : Private Links : It provides private connectivity to the resources. If we have any requirement, s3 rwquests/dynamodb req should not flow over the internet. 
+
+NAT Gateway Works with IPv4. 
+If our VPC is configured to use IPv6, Instead of NAT Gateway, We use "Egress Only Internet Gateways".
+
+
+Can we associate multiple CIDRs for our VPC.
+Yes.. 
+
+_________________
+
+
+VPC Peering : Allow us to enable communication between multiple VPCs. (Same region, DIff region, Diff AWS accout VPCs)
+
+--> Requester VPC and Accepter VPC should not have same CIDR range.
+--> VPC Peering is non transitive peering. 
+--> Update both the VPCs route tables with Another VPC CIDR blocks via Peering connection. 
+
+			Requester VPC (mumbai)				Accepeter VPC (N.V)
+VPC CIDR	192.168.0.0/21						10.0.0.0/16
+VPC ID		vpc-0a2fda59565edb170				vpc-0957001c24560312d
+												vpc-0957001c24560312d
+Region		ap-south-1							ap-south-1
+ACC ID		501170964283						250886770413
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
