@@ -313,13 +313,48 @@ VPC Peering : Allow us to enable communication between multiple VPCs. (Same regi
 --> Update both the VPCs route tables with Another VPC CIDR blocks via Peering connection. 
 
 			Requester VPC (mumbai)				Accepeter VPC (N.V)
-VPC CIDR	192.168.0.0/21						10.0.0.0/16
-VPC ID		vpc-0a2fda59565edb170				vpc-0957001c24560312d
-												vpc-0957001c24560312d
-Region		ap-south-1							ap-south-1
-ACC ID		501170964283						250886770413
+VPC CIDR	192.168.0.0/22						10.0.0.0/16
+VPC ID		vpc-059f25259041bf373				vpc-0ab66b3ee5757dcf3
+Region		ap-south-1							ap-southeast-2
+ACC ID		501170964283						501170964283
 
 
+-----------
+
+
+8 Subnets in environment :  2 public-web (public), 2 application (private), 2 Database/data (private), 2 lambda.. 
+
+If our VPC is running with IPv6: instead of NAT Gateway, we need to "Egress Only Internet gateway"
+
+
+VPN Connectivity (openvpn): https://www.youtube.com/watch?v=JSTyjISscNg
+Transit Gateway : https://www.youtube.com/watch?v=xyLlMBHy2wc
+
+
+Site-to-site vpn settings
+
+1. Create Virtual private gateway.
+2. Create Customer Gateway. You need to provide your corporate office Public IP address which is confired in Firewall.
+3. Using the Step 1 and step 2 resource and configure the Site to site vpn. Download the configuration and share it with Firewall team.
+
+Task : Practice entire VPC (except NAT gateway : Use NAT Instance)
+
+
+-----------------
+
+Connect to Private Subnet resources without bastian host : 
+https://www.youtube.com/watch?v=CN-_Y3uqC44&t=3s
+
+
+Single instance: 
+ssh -i 730-Linux.pem ec2-user@i-0e78400f916d546a0 \
+    -o ProxyCommand='aws ec2-instance-connect open-tunnel --instance-id i-0e78400f916d546a0'
+	
+Multi with port forwarding:
+
+aws ec2-instance-connect open-tunnel \
+    --instance-id i-0e78400f916d546a0 \
+    --local-port 8888
 
 
 
