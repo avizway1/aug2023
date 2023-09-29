@@ -71,8 +71,6 @@ Automatic Backup : AWS creates backups automatically.  : Disable
 --> We will get DB Endpoint to connect to db instance. We won't get any IP address for this db instances. 
 
 
-
-
 Task 1 : Launch an Mysql RDS db instance in CUstomVPCs Private SUbnet. Launch an ec2 instance in custom VPC Public Subnet and Install Mysql workbench then connect to the RDS db instance.  
 
 Task 2 : Restore the shared sample db to the rds instance.  Run a SQL command to list all custo0mer information. (SELECT * FROM db.table)
@@ -81,4 +79,73 @@ Task 3 : Launch a POSTGRE SQL RDS db instance in CUstomVPCs Private SUbnet. Laun
 
 
 ================================================================================================
+
+D: 29/09/2023
+
+
+MultiAZ Deployment : Designed for Failover/FT purpose. : Creates a standby in a different Availability Zone (AZ) to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups.
+
+
+Automated Backup : This feature creates backup copies of our RDS instances automatically.  Based on retention period, we can have backup copies in our aws env to restore. 
+Disable : 0 
+Min : 1 Day
+Max : 35 Days
+
+--> When we are launching db instance, it creates a backup copy automatically, if this feature is enabled. 
+
+7 Days : AWS keeps last 7 days backup copies. 
+
+
+Enhanced Monitoring : 1 Sec
+Basic Monitoring : 5 Min
+
+____
+
+We have "Read Replica" option for scaling purpose. It works with "Master-Slave" mechanism.
+
+Role : Instance   ||   Primary & Replica
+
+Primary : Supports read and write
+Replica : Supports only read operations
+
+_________________
+
+Manual Snapshots : We can create snapshots manually. These won't delete along with rds db instance.  We need to delete manually.
+
+Automated/system snapshots : AWS creates these, We cannot delete these.
+
+
+RDS won't work on In-Place restoration. Restoration happens as a new rds db instance with new endpoint.
+
+
+Restore to point in time : You are creating a new DB instance from a source DB instance at a specified time.
+
+
+____________________________________________________________________________________
+
+Task 1 : Refer the Shared VPC Image and Deliver Webpage from provate subnet ec2 instances, via Load Balancer.
+
+----------------------------------------------
+
+**Exp: Mandatory
+
+Task 2 : perform DMS Migration from Mysql to mysql with in a vpc.
+
+Task : launch an rds mysql db instance-1.. Now export/restore the shared db... 
+
+Launch another rds mysql db instance-2.. Migrate all the datbases and tables from Db instance-1 to db instance-2 Using DMS (Database Migration service).
+
+1. Launch a DMS cluster
+2. Create endpoints (Source and destination) and test the endpoints
+3. Create a replciation job and verify.
+
+https://www.youtube.com/watch?v=SXuOjfKpIrs
+
+----------------------------------------------
+
+
+Task 3 : Install mysql workbench in your local laptop. Create a mysql rds cluster in "customvpc- Private Subnet", Now connect to this instance from your local laptop over ssh connection.
+--> Launch an amazon linux 2 instance in customvpc-publicsubnet.
+
+reference video: https://www.youtube.com/watch?v=qulcnNu8g7o
 
