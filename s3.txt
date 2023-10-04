@@ -112,3 +112,86 @@ Preferences --> Billing preferences --> Receive Free Tier Usage Alerts --> Enabl
 
 Task 2 : Create an s3 bucket, Upload an object, Make object public accesable.
 
+==============================================================================================
+
+D: If you are typing "Delete" ==> you'll get delete Marker. 
+If you are typing "perm Delete" ==> You wont get Delete marker.
+
+Delete the "Delete Market" to get your object back.
+
+_________
+
+Version : AWS maintains multiple copies in s3 bucket. 
+--> Defaultly versioning will be in Suspended state.
+
+--> When versioning is enabled on bucket, If we delete an object
+
+Versioning : HIDE
+--> S3 will show most recent uploaded object only / Current version objects.
+--> We will get a Delete Marker. 
+--> TO get object back / undo delete, Set Version to SHOW, Delete the delete marker.
+
+Versioning : SHOW
+--> If we delete an object, it deletes permanently.
+_____________________________________________________________________________________
+
+Life Cycle Management Rule : 
+--> We can apply Rule to entire bucket
+--> We can limit rule to a prefix (Folder)
+--> We can limit rule to objects by specifing a "Tag"
+
+
+S3 Standard --> StandardIA/IT --> Glacier --> Delete
+S3 Standard --> Glacier --> Delete
+S3 Standard --> Delete
+ 
+____________________
+
+CRR / SRR : 
+--> Source bucket and destination bucket must be enabled with versioning. 
+--> Existing objects will not replicate to the destination bucket.
+--> All future / subsequent uploads will replicate to destination bucket. 
+
+RTC : Replication time control : Data replicates to destination bucket with in 15 Min. (99.99% of the data) : COST US
+
+___
+
+Data transfer from One region to another region "cost us".
+Data transfer within a region won't cost us anything.
+_______________________
+
+aws s3 sync s3://sourcebucket s3://Targetpath		==> 12:00AM   (task scheduler / cron job)
+
+aws s3 sync localfolder s3://s3backupbucket
+
+_______________________
+
+Task 1 : Create a bucket in N Virginia, Configure Versioning and test it. 
+
+Task 2 :  Create another bucker in N Virginia region only.. configure same region replication between these buckets.
+
+Task 3 : Create a Life CYcle management rule to transit current version objects from s3 standard to Delete after 1 Day.
+Transit previous version objects to Delete after 1 Day.
+
+
+**Personal Account**
+Task 4 : Create a policy to allow everything in an AWS account, But user should be able to create a bucket in "ap-south-1" region only.
+--> Create a bucket in "mumbai", it should work... But if he try to create bucket in any other region it should fail.
+
+1. Create a policy allow anything but only on mumbai region. (copy policy from AdministratorAccess)
+2. Create an IAM user and allocate Newly created policy
+3. Login as IAM user, Navigate to S3, Try to create a bucket in mumbai, should allow.. SHould deny if you choose any other region.
+
+Task 5 : Configure Replication Rule to replicate data from Account-1 s3 bucket to account-2 s3 bucket.
+
+
+
+
+
+
+
+
+
+
+
+
