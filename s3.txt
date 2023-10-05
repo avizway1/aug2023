@@ -184,11 +184,81 @@ Task 4 : Create a policy to allow everything in an AWS account, But user should 
 
 Task 5 : Configure Replication Rule to replicate data from Account-1 s3 bucket to account-2 s3 bucket.
 
+=========================================================================================================
+
+D: 05/10/2023
 
 
+S3 Static Website Hostic : 
+
+--> We need to make data public read, then only our website will deliver. 
+--> Purchased Domain name should be same as Bucket name. 
+http://learnaws.co.in.s3-website.ap-south-1.amazonaws.com  ==> learnaws.co.in
+
+http status codes :
+2XX : OK/Success
+3XX : Redirection
+4XX : Client sider error
+5XX : Server sider error
+
+Task : Download a template from Internet. Deliver the webiste using s3 - static webiste feature.
 
 
+https://www.free-css.com/free-css-templates
 
+------------
+
+Event notifications : 
+
+--> SNS : Simple Notification Service : 1000 EMAILs Free Tier eligibility
+--> SQS : Simple Queue Service
+--> Lambda 
+
+--> Make sure you edit the SNS topic's "Access Policy to everyone".
+
+
+------------
+
+Object Lock : 
+
+--> Versioning must be enabled.
+--> After bucket creation we cannot enable this feature. if you want this feature for an existing bucket, contact aws support.
+Permanently allows objects in this bucket to be locked. Additional Object Lock configuration is required in bucket details after bucket creation to protect objects in this bucket from being deleted or overwritten.
+
+Governance : Users with specific IAM permissions can overwrite or delete protected object versions during the retention period.
+
+Compliance : No users can overwrite or delete protected object versions during the retention period.
+
+_____
+
+Performance : 
+3500 PUT Object per second per prefix
+5500 GET Object per second per prefix
+
+--> Increase the uniqueness for the object names.
+--> Use more prefixes (folders)
+
+-----
+
+Monitoring S3 Bucket : 
+
+Free Metrics:
+Total number of objects
+Total bucket size
+
+We do have an option to enable paid metrics.
+
+-----
+
+
+Storage Class Analysis : Analyze storage access patterns to help you decide when to transition objects to the appropriate storage class.
+
+_______
+
+Transfer acceleration : Uses Edge locations for data transfer. (COST US)
+S3 Transfer Acceleration is not supported for buckets with periods (.) in their names
+
+https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html?region=ap-south-1&origBucketName=2505-avinash
 
 
 
