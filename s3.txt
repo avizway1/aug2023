@@ -261,6 +261,80 @@ S3 Transfer Acceleration is not supported for buckets with periods (.) in their 
 https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html?region=ap-south-1&origBucketName=2505-avinash
 
 
+=======================================================================
+
+D: 06/10/2023
+
+--> In-Transit Encryption : 
+	SSL (Secure socket layer) / TLS (Transport layer secure)
+
+--> SSE (Server Side Encryption) / At-rest : 
+
+SSE-S3 : S3 platform generates and manages the key material. whoever have valid access on S3 platform can decrypt/view the data. (An encryption key that Amazon S3 creates, manages, and uses for you). AES-256
+--> We need to use this to make any data public.
+
+SSE-KMS : Key Management Service : 
+	KMS (AWS managed keys) (aws/s3) DMK (Default Master Key) : KMS Service generates and manages the key material. whoever have valid access on S3 platform can decrypt/view the data. We cannot delete these keys. 
+--> We cannot make data public using this keys.
+
+	 CMK (Customer managed keys) : KMS Service generates and manages the keymaterial.
+Along with S3 platform, the IAM user need to have valid permissions on ENCRYPTION KEY also. 
+NO FREE TIER ELIGIBILITY.
+
+	SSE-C (Customer Provided Key): Customer generates and upload the key material to KMS and KMS uses this key material to encrypt/decrypt the data. Customer can change the key material at any time. 
+NO FREE TIER ELIGIBILITY.
+
+--> CSE (Client Side Encryption) : 
+Before uploading data to s3 platform, we can use our own software/applications to encrypt the data. That encryptrd data we can send to s3. AWS is not completely responsible for this mechanism.
+
+Encryption key generation : 
+--> Choose key type : Symmetric /Asymetric : Symetric as s3 supports
+--> Choose key Administrator
+--> Choose Key Users
+--> Review and create
+
+
+SSE-S3 : S3 created key and key material, No Addl Permisisons on Encry key, Only S3 access is fine.
+SSE-KMS DMK : KMS created key and key material, No Addl Permisisons on Encry key, Only S3 access is fine.
+SSE-KMS CMK : Customer Creates key and KMS manages key material, Along with S3 access, User/role should have "Key Usage" permissions.
+SSE-KMS Customer provided : Customer Create key and Customer provide key material, Along with S3 access, User/role should have "Key Usage" permissions.
+
+---------------------------------------------
+
+What is Presign URL :  Short lived urls. 
+--> Without making bucket/object public, we can share an s3 object with presign url, this URL works only for sometime.
+
+--
+
+How can we manage s3 platform with 3rd party applications.!!
+
+--> S3 browser, Cloudberry Explorer, CyberDuck and WinSCP.
+
+
+
+Task : Try to access s3 using 3rd party applications. (S3 browser, Cyberduck, Cloudberry explorer, winscp)
+Steps : Create an IAM user, generate Accesskey and SecretKey. Use this with 3rd party tool.
+
+Task 2 : What is presigned URL. Configure an object to generate a presign url to expire after 60 sec.
+
+Task 3 : Enable Encryption on s3 bucket and test it. (SSE-S3/AWS Managed key KMS-DMK)
+*** practice in Sandbox if you want to test CMK (it will cost us) **
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
