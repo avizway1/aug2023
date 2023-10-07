@@ -304,13 +304,13 @@ SSE-KMS Customer provided : Customer Create key and Customer provide key materia
 What is Presign URL :  Short lived urls. 
 --> Without making bucket/object public, we can share an s3 object with presign url, this URL works only for sometime.
 
---
+---
 
 How can we manage s3 platform with 3rd party applications.!!
 
 --> S3 browser, Cloudberry Explorer, CyberDuck and WinSCP.
 
-
+---
 
 Task : Try to access s3 using 3rd party applications. (S3 browser, Cyberduck, Cloudberry explorer, winscp)
 Steps : Create an IAM user, generate Accesskey and SecretKey. Use this with 3rd party tool.
@@ -320,6 +320,126 @@ Task 2 : What is presigned URL. Configure an object to generate a presign url to
 Task 3 : Enable Encryption on s3 bucket and test it. (SSE-S3/AWS Managed key KMS-DMK)
 *** practice in Sandbox if you want to test CMK (it will cost us) **
 
+===========================================================================================================
+
+D: 07/10/2023
+
+
+Deny upload object operation on a particular bucket. : Bucket policy
+
+Bucket ARN : arn:aws:s3:::avinash.bucket
+IAM User ARN / Principal : arn:aws:iam::501170964283:user/s3user
+Effect : Allow / Deny : Deny
+Action / Operation : PutObject, DeleteBucket
+
+
+Object level / Inside bucket possible operation : arn:aws:s3:::avinash.bucket/*
+Bucket level : arn:aws:s3:::avinash.bucket
+if you dont know bucket level/object level ; give both
+(arn:aws:s3:::BUCKETNAME,arn:aws:s3:::BUCKETNAME/*)
+
+--------------------
+
+Task : Create an IAM user with "S3FullAccess". 
+We need to restrict/DENY this user to perform "DeleteObject" opertion from a specific bucket (bucketname)
+
+
+Task 2 : create a bucket policy, that allow "one spcific IAM USer", to perform anything on this bucket. Remaining all users should not able to perform anything on this bucket.
+--> Refer the policy we have at bottom of this doc
+
+
+Task 3 : Create a bucket, Allocate this bucket to only one specific user. Allow him to perform "GetObject", "PutObject" and "DeleteObject". This User should not able to view all the bucket we have in s3 platform.
+--> Only with the help of a bucket URL, this guy should able to view.   --> IAM POLICY
+
+https://repost.aws/knowledge-center/s3-console-access-certain-bucket
+
+
+Task 4 : Make a bucket public for eveyone using "BUCKET POLICY".
+--> Refer the policy we have at bottom of this doc
+
+Task 5 : gothrough CORS and Multipart Upload video.
+
+
+=================================================================================
+
+Task 2 Policy example : 
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::bucketname",
+                "arn:aws:s3:::bucketname/*"
+            ],
+            "Condition": {
+                "StringNotLike": {
+                    "aws:PrincipalArn": [
+                        "arn:aws:iam::1212121212:user/11111111"
+                    ]
+                }
+            }
+        }
+    ]
+}
+
+
+------------------------------
+Task 4 : 
+
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1691635080227",
+    "Statement": [
+        {
+            "Sid": "Stmt1691635078528",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::policy.test.s3user/*"
+        }
+    ]
+}
+
+========================================================================
+
+Server access logging : enable logging on bucket.
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/LogFormat.html
+
+Cloudtrail : Data events : It allow us to log all s3 activities (Current buckets and future buckets).
+
+----
+
+Requester pays : the requester pays for requests and data transfer costs, and anonymous access to this bucket is disabled. Instead of bucket owner data requester need to pay for the data transfer & request.
+--> Anonomus access disables once we enable this feature.
+
+---
+
+Cross-origin resource sharing (CORS)
+The CORS configuration, written in JSON, defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.
+
+CORS : https://www.youtube.com/watch?v=YrfDLrSVxQ8&t=4s
+
+________________
+
+If we have larger file to uploade to s3 paltform, We can initiate the "Multi Part Upload". 
+
+How to Perform multiPart upload to S3 : 
+https://www.youtube.com/watch?v=ZJaNTLKz334
+
+
+---
+Pricing : https://calculator.aws/
+Free Tier : https://aws.amazon.com/free
+
+
+========================================================================
 
 
 
@@ -331,6 +451,51 @@ Task 3 : Enable Encryption on s3 bucket and test it. (SSE-S3/AWS Managed key KMS
 
 
 
+
+________________________________________________________________________________
+
+FOr Put of new object, "read after write consistency". (If upload success, we can start accessing the data without any delay)
+Eventual consistenacy For overwrite an object / delete an object. (AFter delete shown as success, we may get response for the request for some milli seconds) (You have uploaded object with latest data and trying to access, you have chances to get previous data object) 
+_________________
+
+AWS Snow Family : 
+--> AWS snowcone : 8 TB
+--> AWS Snowball : 100 TB
+--> AWS Snowball edge : 40 - 100 TB
+--> AWS Snow mobile : PB scale container
+
+1 pb data, 1 gbps internet line with 80%.. 20-25 yrs
+
+___
+
+AWS Direct Connect : Dedicated connection between on-premise/local environment to AWS environment. 3-4 weeks time required. We need to choose the required bandwidth. 
+--> Airtel, jio, sify
+
+Site-to-site VPN : Happens over the internet.
+
+-----------------------------------------------
+
+Storage Gateway:
+
+Amazon S3 File Gateway : Store and access objects in Amazon S3 from NFS or SMB file data with local caching.
+--> Your data is in s3 bucket only, from your local network, whatever the data you access very frequently, that will be stored in your storage gateway that is running in same network/on-prem.
+
+Volume Gateway : Store and access iSCSI block storage volumes in Amazon S3.
+
+Tape Gateway : Store virtual tapes in Amazon S3 using iSCSI-VTL, and store archived tapes in Amazon S3 Glacier Flexible Retrieval or Amazon S3 Glacier Deep Archive.
+
+
+=================================================================================
+
+Certification Topics : 
+--> Storage classes
+--> Life Cycle management rule
+--> replication
+--> encryption
+--> versioning
+--> Data Migration (Snow Family)
+--> Data consisntency
+--> Data performance 
 
 
 
