@@ -1,0 +1,58 @@
+
+
+AWS Trusted Advisor : Based on our support plan aws provide suggestions to fix 
+--> Cost Optimization : under utilised resources
+--> Performance : Over utilized resources
+--> Security
+--> Fault Tolerance
+--> Service Limits
+
+_________________________________________________________________________________
+
+ACM : Amazon Certificate Manager : Generate SSL/TLS certificates. 
+
+Task : Deliver website using ELB.. Generate SSL cert and configure http to https redirection.
+https://raw.githubusercontent.com/avizway/redirection/master/httptohttps
+
+
+https://stackoverflow.com/questions/16200501/how-to-automatically-redirect-http-to-https-on-apache-servers
+
+______________________________________________________________________________________
+
+AWS Cloudfront : AWS CDN Service (Content Delivery Network) : Akamai, cloudflair..
+--> CLoudfront have a feature to protect our resources from DDoS attack.
+
+To get the latest data from the Origin / To clear the cache from Edge location, We can perform "Invalidation".
+
+Cache and origin request settings : Use legacy cache settings
+
+Default TTL : 86,400 Sec (1 Day)'
+Max : 365 Days
+
+We must create SSL Cert in N Virginia to map with cloudfront distribution. 
+
+--> Based on endcustomer geo location, we can whitelist/blocklist the data.
+____________
+
+Task : Create an ELB, Try to deliver with Cloudfront distribution.
+____________________________________________________________________________________
+
+
+WAF : Web Application Firewall : Application ELB, CLoudfront, API Gateway.. : AWS WAF is a web application firewall service that lets you monitor web requests that are forwarded to an Amazon API Gateway API, an Amazon CloudFront distribution, or an Application Load Balancer. You can protect those resources based on conditions that you specify, such as the IP addresses that the requests originate from.
+
+-->  We can create rules in WAF and apply on top of Application Load balancer / Cloudfront / Api gateway.
+____
+
+Protect our resources from DDoS attack : AWS Shield Advanced ($3000/Month)  + ASG + CloudFront
+
+
+AWS Shiled / AWS Shieled advanced : Designed to protect our resources from DDoS Attack. 
+
+Shield Enabled for all the aws account. 
+Shield advanced cost us 3000$/Month.. AWS Team monitor the DDoS attack/traffic.
+
+=====================================================
+
+
+
+
