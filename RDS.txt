@@ -141,11 +141,82 @@ Launch another rds mysql db instance-2.. Migrate all the datbases and tables fro
 
 https://www.youtube.com/watch?v=SXuOjfKpIrs
 
-----------------------------------------------
 
+----------------------------------------------
 
 Task 3 : Install mysql workbench in your local laptop. Create a mysql rds cluster in "customvpc- Private Subnet", Now connect to this instance from your local laptop over ssh connection.
 --> Launch an amazon linux 2 instance in customvpc-publicsubnet.
 
 reference video: https://www.youtube.com/watch?v=qulcnNu8g7o
+
+
+
+========================================================================================================
+
+
+Homegenious : mysql --> DMS --> AWS RDS Mysql
+heterogenious : IBM DB2 --> SCT (Schema Convertion tool) --> DMS --> AWS RDS Mysql/aurora
+
+
+Step 1 : create a DMS cluster (dms.t2.micro)
+Step 2 : Create source endpoint (Create an RDS cluster, and restore the shared sample Database), test the connectivity to DMS cluster
+Step 3 ; Create a Target endpoint (Create a new rds cluster) test the connectivity to DMS cluster
+
+Step 4 : Create a Migration task using Source and target endpoints (step 2 and 3)
+
+migrate existing data. one time.
+Migrate changes only. only changes migrates.
+Migrate existing and continue migration. 
+
+
+-------
+
+How to connect to Redshift : 
+https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-using-workbench.html
+Tool Name : sql workbenh/J.
+
+
+OLAP : Online Analytical process : Redshift
+OLTP : Online Transactional process : RDS
+
+Redshift: 
+leader node : Designed to run query on compute nodes.
+Compute Node : it stores actual data
+
+_________________
+
+**Cost you**
+
+Task : launch an ec2 instance in mumbai region.. connect to it and make it as webserver.. 
+
+Use AWS Application Migration Service (MGN) and migrate the Mumbai region ec2 instance to "Sydney" region and verify webpage.
+
+https://www.youtube.com/watch?v=fIEwoFaXExQ
+
+
+----------------------------------
+
+Task 3: COST US https://aws.amazon.com/getting-started/hands-on/migrate-rdsmysql-to-auroramysql/?trk=gs_card (No free tier)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -51,8 +51,64 @@ AWS Shiled / AWS Shieled advanced : Designed to protect our resources from DDoS 
 Shield Enabled for all the aws account. 
 Shield advanced cost us 3000$/Month.. AWS Team monitor the DDoS attack/traffic.
 
-=====================================================
+=================================================================================================
+
+D: 11/10/2023
+
+Cloudtrail : Logging service. Enabled by default. it stores only last 90 days logs. Create a trail to s3 to store all logs for unlimited days. 
+
+• Management events provide information about management operations that are
+performed on resources in your AWS account. These are also known as control plane
+operations.
+
+• Data events provide information about the resource operations performed on or in a
+resource. These are also known as data plane operations. Data events are often high-volume activities. Data events can log s3, Dynamodb and Lambda services.
+
+• Insight Events : CloudTrail Insights events capture unusual activity in your AWS account. If you have Insights events enabled, and CloudTrail detects unusual activities.
+
+--> Cloudwatch Agent : We can install cw agent at os level, we can get custom logs of Instance OS. 
+
+** Realtime : We enable trail for all accounts in one AWS Logging account. If any external auditor visits, we can provide access on only logging account.
+In Real env: We create a trail for Management, another trail for data and another for insights.
 
 
+DataDog, Splunk, site24x7
+
+==================================================
+
+Config : (Config works with Cloudtrail) : Record and evaluate configurations of your AWS resources. "NO FREE TIER"
+--> No s3 bucket should have public access. (Non_Compliant resource)
+--> WHen SSL cert is about to expire.
+
+___________
 
 
+SMS : Server Migration Service : 
+--> CloudEndure
+
+https://console.cloudendure.com/
+
+What Server we want to migrate to aws, Install CLoudendure Agent --> Cloudendure screen create a task and test the connection --> Launch migration instance in AWS environment --> Run the migration task.. We will get an AMI --> Launch instance from AMI. 
+
+
+DMS : https://www.youtube.com/watch?v=SXuOjfKpIrs
+GCP to AWS / Anywhere to AWS : https://www.youtube.com/watch?v=8xf1RpPdcHs
+azure to aws migration : https://www.youtube.com/watch?v=bdaHMRqCBkg
+
+SMS with VMWARE : https://www.youtube.com/watch?v=Vx9lRRY-shg
+
+
+==============================================================================
+
+
+Migrate Server From One region to another region: DATA TRANSFER COST APPLY:  
+https://www.youtube.com/watch?v=fIEwoFaXExQ
+
+--> Launch an ec2 instance in Mumbai region, configure web server..  Migrate this instance to "mumbai" using MGN Service.
+
+
+===========================
+
+https://www.youtube.com/playlist?list=PLneBjIzDLECnvHUiqAe5DYHcnXSOTWeXO
+
+===========================
