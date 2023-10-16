@@ -276,13 +276,14 @@ azure to aws migration : https://www.youtube.com/watch?v=bdaHMRqCBkg
 
 _______________________________
 
-Task : Create AWS Organisation and enable SSO, Create Multiple users and test SSO login option with multiple Permission Sets.
 
-Task 2 : Create a repository, Get familier with clone, push, add, commit. 
 
-Task 3 : Launch an ec2 instance in Mumbai region.. Migrate this ec2 instance from mumbai region to N Virginia region using "CloudEndure Migration".
-Cloudendure migration : https://www.youtube.com/watch?v=8xf1RpPdcHs
+Task : Create a repository, Get familier with clone, push, add, commit. 
 
+Task 2 : use same content shared for project 1, Create a Repo and when any code commited to repo, pipeline need to trigger and it should deploy to beanstalk automatically.
+
+
+Project 3 : Take sample Dockerfiles from github repository and deploy it in ecs cluster and integrate it with application load balancer and auto scaling group.
 
 
 
